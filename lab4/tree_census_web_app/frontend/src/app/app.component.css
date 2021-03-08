@@ -1,0 +1,29 @@
+.wrapper {
+    overflow: hidden;
+}
+
+.wrapper div {
+    min-height: 100vw;
+    padding: 10px;
+}
+
+#one {
+    float: left;
+    margin: 20px;
+    width: 30%;
+    overflow: hidden;
+}
+
+#two {
+    overflow: hidden;
+    margin: 20px;
+    min-height: 100vw;
+}
+
+@media screen and (max-width: 1000px) {
+    #one {
+        float: none;
+        margin-right: 0;
+        width: auto;
+    }
+}

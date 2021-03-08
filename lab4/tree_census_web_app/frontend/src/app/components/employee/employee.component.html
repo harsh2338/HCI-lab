@@ -1,0 +1,194 @@
+<div class="wrapper">
+    <mat-toolbar>
+        <span style="position: absolute;left: 48%;">Tree Census</span>
+    </mat-toolbar>
+    <div id="one">
+        <div>
+            <mat-card>
+                <h3>Tree Information Form</h3>
+                <form [formGroup]="appraisalForm">
+
+                    <!-- <div class="form-group">
+                        <mat-form-field>
+                            <input class="form-control" formControlName="employee_id" type="number" matInput placeholder="Employee ID" required>
+                        </mat-form-field>
+                    </div> -->
+
+                    <div class="form-group">
+                        <mat-form-field>
+                            <input class="form-control" formControlName="name" type="text" matInput placeholder="Name" required>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field>
+                            <mat-label>Tree Type</mat-label>
+                            <mat-select class="form-control" formControlName="position">
+                                <mat-option value="Deciduos">Deciduos</mat-option>
+                                <mat-option value="Conferous">Conferous</mat-option>
+                                <mat-option value="Evergreen ">Evergreen</mat-option>
+                                <!-- <mat-option value="Junior ">Junior Developer</mat-option> -->
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="form-group">
+                        <mat-form-field>
+                            <mat-label>Department</mat-label>
+                            <mat-select class="form-control" formControlName="department">
+                                <mat-option value="HR">Human Resource</mat-option>
+                                <mat-option value="Web">Web department</mat-option>
+                                <mat-option value="App">App department</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div> -->
+                    <!-- <div class="form-group">
+                        <mat-form-field>
+                            <mat-label>Date</mat-label>
+                            <input matInput [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div> -->
+
+                    <div class="form-group">
+                        <mat-form-field>
+                            <input matInput type="datetime-local" placeholder="Date Time">
+                          </mat-form-field>
+                    </div>
+
+
+                    <div class="form-group">
+                        <mat-form-field>
+                            <input class="form-control" formControlName="latitude" type="text" matInput placeholder="Latitude" required>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field>
+                            <input class="form-control" formControlName="longitude" type="text" matInput placeholder="Longitude" required>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field>
+                            <input class="form-control" formControlName="Height" type="text" matInput placeholder="Height" required>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field>
+                            <input class="form-control" formControlName="Diameter" type="text" matInput placeholder="Diameter" required>
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="form-group">
+                        <mat-form-field>
+                            <input class="form-control" formControlName="salary" type="number" matInput placeholder="Salary" required>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <p style="float: left;">{{conduct}}</p>
+                        <mat-slider style="float: left; margin-left: 30px;" [max]="max" [min]="min" [step]="step" [thumbLabel]="thumbLabel" formControlName="conduct" placeholder="Conduct" [vertical]="vertical">
+                        </mat-slider>
+                    </div>
+                    <div class="form-group">
+                        <p style="float: left;">{{qual}}</p>
+                        <mat-slider style="float: left; margin-left: 30px;" [max]="max" [min]="min" [step]="step" [thumbLabel]="thumbLabel" formControlName="quality" placeholder="Quality" [vertical]="vertical">
+                        </mat-slider>
+                    </div>
+                    <div class="form-group">
+                        <p style="float: left;">{{team}}</p>
+                        <mat-slider style="float: left; margin-left: 30px;" [max]="max" [min]="min" [step]="step" [thumbLabel]="thumbLabel" formControlName="teamwork" placeholder="Teamwork" [vertical]="vertical">
+                        </mat-slider>
+                    </div>
+                    <div class="form-group">
+                        <p style="float: left;">{{skill}}</p>
+                        <mat-slider style="float: left; margin-left: 30px;" [max]="max" [min]="min" [step]="step" [thumbLabel]="thumbLabel" formControlName="skill" placeholder="Skill" [vertical]="vertical">
+                        </mat-slider>
+                    </div> -->
+                </form>
+            </mat-card>
+            <button mat-raised-button color='primary' style="width: 100%;" (click)='onSubmit()'>Save</button>
+        </div>
+    </div>
+ <div id="two"> 
+        <div class="search-div">
+            <mat-form-field class="search-form-field" floatLabel="never">
+                <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div class="mat-elevation-z8">
+            <mat-table [dataSource]="listData">
+                <!-- <ng-container matColumnDef="ID">
+                    <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.employee_id}}</mat-cell>
+                </ng-container> -->
+                <ng-container matColumnDef="Name">
+                    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Tree Type">
+                    <mat-header-cell *matHeaderCellDef>Tree Type</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.type}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Date">
+                    <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.date}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Time">
+                    <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.time}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Latitude">
+                    <mat-header-cell *matHeaderCellDef>Latitude</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.latitude}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Longitude">
+                    <mat-header-cell *matHeaderCellDef>Longitude</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.longitude}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Height">
+                    <mat-header-cell *matHeaderCellDef>Height</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.height}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Diameter">
+                    <mat-header-cell *matHeaderCellDef>Diameter</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.diameter}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button mat-icon-button (click)="onEdit(row)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" (click)="onDelete(row._id)">
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="loading">
+                    <mat-footer-cell *matFooterCellDef colspan="6">
+                        Loading data...
+                    </mat-footer-cell>
+                </ng-container>
+                <ng-container matColumnDef="noData">
+                    <mat-footer-cell *matFooterCellDef colspan="6">
+                        No data.
+                    </mat-footer-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+                <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+
+            </mat-table>
+            <mat-paginator [pageSizeOptions]="[1,5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+        </div>
+    </div> 
+</div>
